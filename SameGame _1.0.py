@@ -7,15 +7,15 @@ init()
 class Cgame:
 # initializes a gameboard
 # containing boardheight (self.row), boardwidth (self.col), blocks placed on the board (self.board)
-  def __init__ (self, dimensions = (10,10), colorDistribution = [1,1,1,1]):
+  def __init__ (self, dimensions = (20,10), colorDistribution = [1,1,1,1]):
     col, row = dimensions
     self.row = row
     self.col = col
     fields = col*row
     colors = sum(colorDistribution)
-    coords = shuffle([(i,j) for j in range (col) for i in range (row)])
+    coords = shuffle([(i,j) for j in range (row) for i in range (col)])
     colorNum = 1
-    self.board = [[0 for j in range (col)] for i in range (row)]
+    self.board = [[0 for j in range (row)] for i in range (col)]
     for color in colorDistribution:
       coloredAmount = fields * color // colors
       for (column, row) in coords[:coloredAmount]:
