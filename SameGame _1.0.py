@@ -47,8 +47,8 @@ class Cgame:
     surroundings = [(column-1, row), (column, row-1), (column, row+1), (column+1, row)]
     for nextBlock in surroundings:
       nextCol, nextRow = nextBlock
-      if (0 <= nextCol < self.row):
-        if (0 <= nextRow < self.col):
+      if (0 <= nextCol < self.col):
+        if (0 <= nextRow < self.row):
           if (nextBlock not in deleteCoords):
             if  (self.board[nextCol][nextRow] == colorNum):
               deleteCoords = self.spread([nextBlock] + deleteCoords, nextCol, nextRow, colorNum)
@@ -73,8 +73,6 @@ class Cgame:
           empty = False
           
       if empty:
-        print(str(column))
-        self.print()
         self.board.pop(column)
         emptyCol = []
         for row in range(self.row):
