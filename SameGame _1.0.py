@@ -49,7 +49,7 @@ class CGame:
         if (0 <= nextRow < self.row):
           if ((nextCol, nextRow) not in deleteCoords):
             if  (self.board[nextCol][nextRow] == colorNum):
-              deleteCoords = self.spread([nextBlock] + deleteCoords, nextCol, nextRow, colorNum)
+              deleteCoords = self.spread([(nextCol, nextRow)] + deleteCoords, nextCol, nextRow, colorNum)
     return deleteCoords
 
 # applies downwards gravity
@@ -105,6 +105,8 @@ class CGame:
           sys.stdout.write(', ')
       print(']')
     print()
+#end class
+
 
 # shuffles the given list
 def shuffle(list): 
