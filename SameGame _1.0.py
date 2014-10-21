@@ -4,7 +4,7 @@ import sys
 from colorama import init, Fore, Back, Style
 init()
 
-class Cgame:
+class CGame:
 # initializes a gameboard
 # containing boardheight (self.row), boardwidth (self.col), blocks placed on the board (self.board)
   def __init__ (self, dimensions = (20,10), colorDistribution = [1,1,1,1]):
@@ -34,8 +34,7 @@ class Cgame:
     deleteCoords = [(column, row)]
     deleteCoords = self.spread(deleteCoords, column, row, self.board[column][row])
     if len(deleteCoords) > 1:
-      for delete in deleteCoords:
-        column, row = delete
+      for column, row in deleteCoords:
         self.board[column][row] = 0
       self.gravityDown()
       self.gravityLeft()
@@ -128,7 +127,7 @@ def calcPoints(amount):
 # creates a new board
 # then repeatetly asks for coordinates as input (checking if valid)
 def main():
-  game = Cgame()
+  game = CGame()
   game.print()
   pattern = re.compile(r"(\d*),(\d*)")
   points = 0
@@ -147,5 +146,6 @@ def main():
         print('Punkte: ' + str(points))
         print('Runden: ' + str(rounds))
         print()
+
 if __name__ == "__main__":
   main()
