@@ -44,11 +44,10 @@ class CGame:
 # returns a list of coordinates, each coordinate represents a stone to destroy
   def spread(self, deleteCoords, column, row, colorNum):
     surroundings = [(column-1, row), (column, row-1), (column, row+1), (column+1, row)]
-    for nextBlock in surroundings:
-      nextCol, nextRow = nextBlock
+    for nextCol, nextRow in surroundings:
       if (0 <= nextCol < self.col):
         if (0 <= nextRow < self.row):
-          if (nextBlock not in deleteCoords):
+          if ((nextCol, nextRow) not in deleteCoords):
             if  (self.board[nextCol][nextRow] == colorNum):
               deleteCoords = self.spread([nextBlock] + deleteCoords, nextCol, nextRow, colorNum)
     return deleteCoords
