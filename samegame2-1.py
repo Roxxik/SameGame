@@ -47,8 +47,7 @@ class Game(object):
 
   def move(self, board):
     cols = filter(lambda line: any(map(bool,line)),zip(*board))
-    #won't work
-    return tuple(zip(*(cols + (([0]*self.rows)*(self.cols-len(cols))))))
+    return tuple(zip(*(cols + ([([0]*self.rows)]*(self.cols-len(cols))))))
     
   def display(self):
     print "\n".join(map(lambda l:" ".join(map(str,l)), self.board))
