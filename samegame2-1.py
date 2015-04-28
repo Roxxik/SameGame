@@ -26,9 +26,11 @@ class Game(object):
     
   
   def floodfill(self, col, row, color, board):
+    if color == 0 or not(0 <= col < self.cols and 0 <= row < self.rows):
+      return 0, board
     value = board[row][col]
-    if value != color or not(0 <= col < self.cols and 0 <= row < self.rows):
-        return 0, board
+    if value != color:
+      return 0, board
     board = tuple([tuple([val if (x,y) != (col,row) else 0 for x,val in enumerate(line)]) for y,line in enumerate(board)])
     points1, board = self.floodfill(col, row+1, color, board)
     points2, board = self.floodfill(col, row-1, color, board)
@@ -45,7 +47,8 @@ class Game(object):
 
   def move(self, board):
     cols = filter(lambda line: any(map(bool,line)),zip(*board))
-    return tuple(zip(*(([0]*self.rows)*(len(cols)-self.cols)) + cols))
+    #won't work
+    return tuple(zip(*(cols + (([0]*self.rows)*(self.cols-len(cols))))))
     
   def display(self):
     print "\n".join(map(lambda l:" ".join(map(str,l)), self.board))
