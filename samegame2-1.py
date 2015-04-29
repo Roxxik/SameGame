@@ -34,8 +34,10 @@ class Game(object):
             (1, 2, 2, 4, 4, 2, 3, 1, 3, 3), 
             (2, 3, 4, 1, 3, 4, 3, 2, 4, 1),)
   """
-  
-  
+  #generate a board
+  #@param colorDistibution The distribution of colors, the index is the color the value is the amount
+  #@param seed The seed to initialize the pnrg
+  #@return The generated board
   def genBoard(self, colorDistribution, seed=None):
     colorSum = sum(colorDistribution)
     coords = shuffle([(i,j) for i in range (self.cols) for j in range (self.rows)], seed)
@@ -75,13 +77,11 @@ class Game(object):
     if value != color:
       return 0, board
     board = tuple([tuple([val if (x,y) != (col,row) else 0 for x,val in enumerate(line)]) for y,line in enumerate(board)])
-    points1, board = self.floodfill(board, color, col, row+1)
-    points2, board = self.floodfill(board, color, col, row-1)
-    points3, board = self.floodfill(board, color, col+1, row)
-    points4, board = self.floodfill(board, color, col-1, row)
-    return sum([points1,points2,points3,points4]) + 1, board
-  
-  #list = zip(*list)  will transpose the list of lists
+    downPts , board = self.floodfill(board, color, col, row+1)
+    upPts   , board = self.floodfill(board, color, col, row-1)
+    rightPts, board = self.floodfill(board, color, col+1, row)
+    leftPts , board = self.floodfill(board, color, col-1, row)
+    return sum([downPts,upPts,rightPts,leftPts]) + 1, board
   
   #apply gravity to the board
   #@param IN board The board to apply the gravity to
