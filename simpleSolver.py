@@ -28,7 +28,7 @@ def main():
   board = parseBoard()
   moves = getSolution(board)
   printMoves(moves)
-  
+
 
 if __name__ == "__main__":
   main()
