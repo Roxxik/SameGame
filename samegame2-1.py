@@ -48,24 +48,24 @@ class Game(object):
   
   def click(self,col,row):
     if 0 <= col < self.cols and 0 <= row < self.rows:
-      pts, board = self.floodfill(col,row, self.board[row][col], self.board)
+      pts, board = self.floodfill(self.board, self.board[row][col], col,row)
       if pts > 1:
         self.board = self.move(self.gravity(board))
       return pts
     else:
       return 0
   
-  def floodfill(self, col, row, color, board):
+  def floodfill(self, board, color, col, row):
     if color == 0 or not(0 <= col < self.cols and 0 <= row < self.rows):
       return 0, board
     value = board[row][col]
     if value != color:
       return 0, board
     board = tuple([tuple([val if (x,y) != (col,row) else 0 for x,val in enumerate(line)]) for y,line in enumerate(board)])
-    points1, board = self.floodfill(col, row+1, color, board)
-    points2, board = self.floodfill(col, row-1, color, board)
-    points3, board = self.floodfill(col+1, row, color, board)
-    points4, board = self.floodfill(col-1, row, color, board)
+    points1, board = self.floodfill(board, color, col, row+1)
+    points2, board = self.floodfill(board, color, col, row-1)
+    points3, board = self.floodfill(board, color, col+1, row)
+    points4, board = self.floodfill(board, color, col-1, row)
     return sum([points1,points2,points3,points4]) + 1, board
   
   #list = zip(*list)  will transpose the list of lists
