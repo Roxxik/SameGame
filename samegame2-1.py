@@ -4,12 +4,17 @@ import random
 def shuffle(list, seed=None):
   if seed != None:
     random.seed(seed)
+  #Fisher-Yates-Algorithm
   for i in range (len(list)):
     j = random.randint(0, i)
     list[i], list[j] = list[j], list[i]
   return list  
 
 class Game(object):
+  #important note:
+  #while programming this the board ought to be immutable to keep a functional style
+  #therefor the board is a tuple instead of a list
+  #might be changed later for performance reasons
   def __init__(self, dimensions = (10,10), colorDistribution = [1,1,1,1], seed = None):
     self.cols, self.rows = dimensions
     self.board = self.genBoard(colorDistribution, seed)
@@ -26,7 +31,7 @@ class Game(object):
             (3, 2, 2, 4, 4, 1, 3, 4, 1, 3), 
             (1, 2, 2, 4, 4, 2, 3, 1, 3, 3), 
             (2, 3, 4, 1, 3, 4, 3, 2, 4, 1),)
-  """  
+  """
   def genBoard(self, colorDistribution, seed=None):
     colorSum = sum(colorDistribution)
     coords = shuffle([(i,j) for i in range (self.cols) for j in range (self.rows)], seed)
@@ -62,18 +67,25 @@ class Game(object):
     points3, board = self.floodfill(col+1, row, color, board)
     points4, board = self.floodfill(col-1, row, color, board)
     return sum([points1,points2,points3,points4]) + 1, board
-
+  
+  #list = zip(*list)  will transpose the list of lists
+  
   def gravity(self,board):
+    #for Haskellers:
+    #transpose (map shift (transpose board))
     return zip(*map(self.shift,zip(*board)))
-    
+  
   def shift(self, line):
     numbers = filter(bool,line)
+    #filter out Zeros and fill the line to its previous size with zeros up front
     return tuple([0]*(len(line) - len(numbers)) + list(numbers))
-
+  
+  #filter out all only-zero-columns and fill the board to its previous size with only-zero-columns to the left
   def move(self, board):
     cols = filter(lambda line: any(map(bool,line)),zip(*board))
     return tuple(zip(*(cols + ([([0]*self.rows)]*(self.cols-len(cols))))))
-    
+  
+  #print the board
   def display(self):
     print "\n".join(map(lambda l:" ".join(map(str,l)), self.board))
     
