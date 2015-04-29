@@ -9,6 +9,9 @@ def shuffle(list, seed=None):
     list[i], list[j] = list[j], list[i]
   return list  
 
+def transpose(list):
+  return zip(*list)
+
 class Game(object):
   #important note:
   #while programming this the board ought to be immutable to keep a functional style
@@ -86,7 +89,7 @@ class Game(object):
   def gravity(self,board):
     #for Haskellers:
     #gravity = transpose . map shift . transpose
-    return zip(*map(self.shift,zip(*board)))
+    return transpose(map(self.shift,transpose(board)))
   
   #apply gravity to a single column
   #@param IN line The column to apply the gravity to
@@ -102,7 +105,7 @@ class Game(object):
   def move(self, board):
     #filter out all only-zero-columns and fill the board to its previous size with only-zero-columns to the left
     cols = filter(lambda line: any(map(bool,line)),zip(*board))
-    return tuple(zip(*(cols + ([([0]*self.rows)]*(self.cols-len(cols))))))
+    return tuple(transpose(cols + ([([0]*self.rows)]*(self.cols-len(cols)))))
   
   #print the board
   def display(self):
