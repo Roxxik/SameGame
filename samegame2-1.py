@@ -1,5 +1,6 @@
 import random
 
+#todo consider replacing this by a self written prng(e.g. lfsr)
 def shuffle(list, seed=None):
   if seed != None:
     random.seed(seed)
@@ -28,7 +29,7 @@ class Game(object):
   """  
   def genBoard(self, colorDistribution, seed=None):
     colorSum = sum(colorDistribution)
-    coords = shuffle([(i,j) for i in range (self.cols) for j in range (self.rows)])
+    coords = shuffle([(i,j) for i in range (self.cols) for j in range (self.rows)], seed)
     board = [[0 for i in range (self.cols)] for j in range (self.rows)]
     fields = self.cols * self.rows
     for color, colorAmount in enumerate(colorDistribution, start = 1):
