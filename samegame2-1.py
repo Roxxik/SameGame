@@ -104,7 +104,7 @@ class Game(object):
   #@returnThe board with the applied move
   def move(self, board):
     #filter out all only-zero-columns and fill the board to its previous size with only-zero-columns to the left
-    cols = filter(lambda line: any(map(bool,line)),zip(*board))
+    cols = filter(lambda line: any(map(bool,line)),transpose(board))
     return tuple(transpose(cols + ([([0]*self.rows)]*(self.cols-len(cols)))))
   
   #print the board
