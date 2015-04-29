@@ -46,6 +46,9 @@ class Game(object):
       board[col][row] = color
     return board
   
+  #clicks on the board of the Game
+  #@param col, row The coords to click at
+  #@return The number of blocks destroyed
   def click(self,col,row):
     if 0 <= col < self.cols and 0 <= row < self.rows:
       pts, board = self.floodfill(self.board, self.board[row][col], col,row)
@@ -55,6 +58,12 @@ class Game(object):
     else:
       return 0
   
+  #Floodfills the board with zeros startign at position col,row
+  #@param IN board The board to apply the floodfill to
+  #@param IN color The color that is to be replaced
+  #@param col The x-coordinate to start at
+  #@param row The y-coordinate to start at
+  #@return (The number of blcks destroyed, The floodfilled board)
   def floodfill(self, board, color, col, row):
     if color == 0 or not(0 <= col < self.cols and 0 <= row < self.rows):
       return 0, board
@@ -70,18 +79,27 @@ class Game(object):
   
   #list = zip(*list)  will transpose the list of lists
   
+  #apply gravity to the board
+  #@param IN board The board to apply the gravity to
+  #@return The board with the applied gravity
   def gravity(self,board):
     #for Haskellers:
-    #transpose (map shift (transpose board))
+    #gravity = transpose . map shift . transpose
     return zip(*map(self.shift,zip(*board)))
   
+  #apply gravity to a single column
+  #@param IN line The column to apply the gravity to
+  #@return The column with the applied gravity
   def shift(self, line):
-    numbers = filter(bool,line)
     #filter out Zeros and fill the line to its previous size with zeros up front
+    numbers = filter(bool,line)
     return tuple([0]*(len(line) - len(numbers)) + list(numbers))
   
-  #filter out all only-zero-columns and fill the board to its previous size with only-zero-columns to the left
+  #moves empty columns to the right
+  #@param IN board The board to apply the move to
+  #@returnThe board with the applied move
   def move(self, board):
+    #filter out all only-zero-columns and fill the board to its previous size with only-zero-columns to the left
     cols = filter(lambda line: any(map(bool,line)),zip(*board))
     return tuple(zip(*(cols + ([([0]*self.rows)]*(self.cols-len(cols))))))
   
