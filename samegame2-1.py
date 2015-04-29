@@ -1,6 +1,5 @@
 import random
 
-#todo consider replacing randint by a self written prng(e.g. lfsr)
 def shuffle(list, seed=None):
   if seed != None:
     random.seed(seed)
