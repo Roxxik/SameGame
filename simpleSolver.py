@@ -1,8 +1,11 @@
 #!/usr/bin/env python
-from board import floodfill
+from board import floodfill, gravity, move, genBoard
 
 def parseBoard():
-  pass
+  return input()
+
+def printMoves(moves):
+  print moves
 
 def main():
   board = parseBoard()
@@ -15,8 +18,8 @@ def main():
       for y in range(rows):
         pts, newBoard = floodfill(board,board[x][y],x,y)
         if pts > 1:
-          move.append((x,y))
-          board = newBoard
+          moves.append((x,y))
+          board = move(gravity(newBoard))
           madeMove = True
           break
       if madeMove:

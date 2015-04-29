@@ -22,6 +22,10 @@ def genBoard(self, colorDistribution, seed=None):
           (3, 2, 2, 4, 4, 1, 3, 4, 1, 3), 
           (1, 2, 2, 4, 4, 2, 3, 1, 3, 3), 
           (2, 3, 4, 1, 3, 4, 3, 2, 4, 1),)
+          
+          
+same but without \n
+((1, 4, 3, 2, 3, 1, 3, 1, 3, 2),(1, 4, 3, 2, 2, 4, 2, 4, 4, 2), (4, 3, 1, 3, 1, 1, 1, 3, 1, 2), (2, 1, 2, 1, 3, 2,4,3, 2, 4), (1, 4, 4, 4, 2, 1, 2, 3, 3, 1), (3, 2, 2, 3, 3, 1, 2, 1, 4, 4), (3, 3, 2, 2, 2, 3, 1, 2, 3, 3), (3, 2, 2, 4, 4, 1, 3, 4, 1, 3), (1, 2, 2, 4, 4, 2, 3, 1, 3, 3), (2, 3, 4, 1, 3, 4, 3, 2, 4, 1),)
 """
 #generate a board
 #@param colorDistibution The distribution of colors, the index is the color the value is the amount
