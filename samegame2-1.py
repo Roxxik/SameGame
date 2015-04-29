@@ -48,10 +48,10 @@ class Game(object):
   
   def click(self,col,row):
     if 0 <= col < self.cols and 0 <= row < self.rows:
-      blocks, board = self.floodfill(col,row, self.board[row][col], self.board)
-      if blocks > 1:
+      pts, board = self.floodfill(col,row, self.board[row][col], self.board)
+      if pts > 1:
         self.board = self.move(self.gravity(board))
-      return blocks
+      return pts
     else:
       return 0
   
