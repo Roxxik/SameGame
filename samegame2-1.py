@@ -18,7 +18,7 @@ class Game(object):
     self.cols, self.rows = dimensions
     self.board = self.genBoard(colorDistribution, seed)
     
-  """    
+  """for test purposes:
   def genBoard(self, colorDistribution, seed=None):
     return ((1, 4, 3, 2, 3, 1, 3, 1, 3, 2),
             (1, 4, 3, 2, 2, 4, 2, 4, 4, 2), 
@@ -31,6 +31,8 @@ class Game(object):
             (1, 2, 2, 4, 4, 2, 3, 1, 3, 3), 
             (2, 3, 4, 1, 3, 4, 3, 2, 4, 1),)
   """
+  
+  
   def genBoard(self, colorDistribution, seed=None):
     colorSum = sum(colorDistribution)
     coords = shuffle([(i,j) for i in range (self.cols) for j in range (self.rows)], seed)
