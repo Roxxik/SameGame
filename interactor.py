@@ -13,10 +13,13 @@ def interact(prog, board):
     return None  
 
 def main():
-  board = Board(colorDistribution = [1,1,1,1],seed=0xDEADBEEF).board
+  b = Board(dimensions=(10,20), colorDistribution = [1,1,1,1,1,1,1,1,1])#,seed=0xDEADBEEF)
+  b.display()
+  board = b.board
   moves = interact("python simpleSolver.py",board)
   if moves != None:
-    print getScore(board,moves)
+    print "moves:", len(moves)
+    print "score:", getScore(board,moves)
   else:
     print "error"
 

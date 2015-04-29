@@ -40,12 +40,12 @@ def genBoard(cols, rows, colorDistribution, seed=None):
   fields = cols * rows
   for color, colorAmount in enumerate(colorDistribution, start = 1):
     coloredFields = fields * colorAmount // colorSum
-    for (col, row) in coords[:coloredFields]:
-      board[col][row] = color
+    for (x, y) in coords[:coloredFields]:
+      board[y][x] = color
     coords = coords[coloredFields:]
-  for color, (col, row) in enumerate(coords,start=1):
-    board[col][row] = color
-  return board
+  for color, (x, y) in enumerate(coords,start=1):
+    board[y][x] = color
+  return tuple(map(tuple,board))
 
 #Floodfills the board with zeros startign at position col,row
 #@param IN board The board to apply the floodfill to
@@ -92,7 +92,7 @@ def shift(line):
 def move(board):
   #filter out all only-zero-columns and fill the board to its previous size with only-zero-columns to the left
   cols = filter(lambda line: any(map(bool,line)),transpose(board))
-  return tuple(transpose(cols + ([[0]*len(board[0])]*(len(board)-len(cols)))))
+  return tuple(transpose(cols + ([[0]*len(board)]*(len(board[0])-len(cols)))))
 
 
 
