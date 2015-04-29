@@ -17,9 +17,14 @@ class Game(object):
   #while programming this the board ought to be immutable to keep a functional style
   #therefor the board is a tuple instead of a list
   #might be changed later for performance reasons
-  def __init__(self, dimensions = (10,10), colorDistribution = [1,1,1,1], seed = None):
-    self.cols, self.rows = dimensions
-    self.board = self.genBoard(colorDistribution, seed)
+  def __init__(self, dimensions = (10,10), colorDistribution = [1,1,1,1], seed = None, board = None):
+    if board != None
+      self.board = board
+      self.rows = len(board)
+      self.cols = len(board[0])
+    else:
+      self.cols, self.rows = dimensions
+      self.board = self.genBoard(colorDistribution, seed)
     
   """for test purposes:
   def genBoard(self, colorDistribution, seed=None):
