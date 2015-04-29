@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from board import floodfill, gravity, move, genBoard, Board
+from board import floodfill, gravity, move
 
 def parseBoard():
   return input()
