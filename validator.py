@@ -6,8 +6,7 @@ def getScore(board, moves):
   b = Board(board=board)
   for m in moves:
     score += b.click(*m)
-  b.display()
-  print score
+  return score
 
 
 def main():

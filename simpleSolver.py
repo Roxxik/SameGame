@@ -25,7 +25,9 @@ def getSolution(board):
   return moves
 
 def main():
-  printMoves(getSolution(parseBoard()))
+  board = parseBoard()
+  moves = getSolution(board)
+  printMoves(moves)
   
 
 if __name__ == "__main__":
