@@ -11,7 +11,7 @@ def getScore(board, moves):
 
 
 def main():
-  board =input()
+  board = input()
   moves = input()
   getScore(b,moves)
 
