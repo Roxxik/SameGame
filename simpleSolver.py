@@ -7,8 +7,7 @@ def parseBoard():
 def printMoves(moves):
   print moves
 
-def main():
-  board = parseBoard()
+def getSolution(board):
   moves = []
   rows = len(board)
   cols = len(board[0])
@@ -23,7 +22,10 @@ def main():
           madeMove = True
     if not madeMove:
       break
-  printMoves(moves)
+  return moves
+
+def main():
+  printMoves(getSolution(parseBoard()))
   
 
 if __name__ == "__main__":

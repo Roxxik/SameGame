@@ -1,16 +1,19 @@
 #!/usr/bin/env python
-import board
+from board import Board
+
+def getScore(board, moves):
+  score = 0
+  b = Board(board=board)
+  for m in moves:
+    score += b.click(*m)
+  b.display()
+  print score
+
 
 def main():
-#for test purposes
-  inp = input()
-  b = board.Board(board=((1, 4, 3, 2, 3, 1, 3, 1, 3, 2),(1, 4, 3, 2, 2, 4, 2, 4, 4, 2), (4, 3, 1, 3, 1, 1, 1, 3, 1, 2), (2, 1, 2, 1, 3, 2,4,3, 2, 4), (1, 4, 4, 4, 2, 1, 2, 3, 3, 1), (3, 2, 2, 3, 3, 1, 2, 1, 4, 4), (3, 3, 2, 2, 2, 3, 1, 2, 3, 3), (3, 2, 2, 4, 4, 1, 3, 4, 1, 3), (1, 2, 2, 4, 4, 2, 3, 1, 3, 3), (2, 3, 4, 1, 3, 4, 3, 2, 4, 1),))
-  for m in inp:
-    b.display()
-    print "move: ", str(m)
-    print "score: ", b.click(*m)
-  b.display()
-#for test
+  board =input()
+  moves = input()
+  getScore(b,moves)
 
 if __name__ == "__main__":
   main()
