@@ -1,12 +1,20 @@
 import random
-import sys
+
+def shuffle(list, seed=None):
+  if seed != None:
+    random.seed(seed)
+  for i in range (len(list)):
+    j = random.randint(0, i)
+    list[i], list[j] = list[j], list[i]
+  return list  
 
 class Game(object):
-  def __init__(self, dimensions = (10,10), colorDistribution = [1,1,1,1]):
+  def __init__(self, dimensions = (10,10), colorDistribution = [1,1,1,1], seed = None):
     self.cols, self.rows = dimensions
-    self.board = self.genBoard(colorDistribution)
+    self.board = self.genBoard(colorDistribution, seed)
     
-  def genBoard(self, colorDistribution):
+  """    
+  def genBoard(self, colorDistribution, seed=None):
     return ((1, 4, 3, 2, 3, 1, 3, 1, 3, 2),
             (1, 4, 3, 2, 2, 4, 2, 4, 4, 2), 
             (4, 3, 1, 3, 1, 1, 1, 3, 1, 2), 
@@ -17,13 +25,29 @@ class Game(object):
             (3, 2, 2, 4, 4, 1, 3, 4, 1, 3), 
             (1, 2, 2, 4, 4, 2, 3, 1, 3, 3), 
             (2, 3, 4, 1, 3, 4, 3, 2, 4, 1),)
+  """  
+  def genBoard(self, colorDistribution, seed=None):
+    colorSum = sum(colorDistribution)
+    coords = shuffle([(i,j) for i in range (self.cols) for j in range (self.rows)])
+    board = [[0 for i in range (self.cols)] for j in range (self.rows)]
+    fields = self.cols * self.rows
+    for color, colorAmount in enumerate(colorDistribution, start = 1):
+      coloredFields = fields * colorAmount // colorSum
+      for (col, row) in coords[:coloredFields]:
+        board[col][row] = color
+      coords = coords[coloredFields:]
+    for color, (col, row) in enumerate(coords,start=1):
+      board[col][row] = color
+    return board
   
   def click(self,col,row):
-    pts, self.board = self.floodfill(col,row, self.board[row][col], self.board)
-    self.board = self.gravity(self.board)
-    self.board = self.move(self.board)
-    return pts
-    
+    if 0 <= col < self.cols and 0 <= row < self.rows:
+      blocks, board = self.floodfill(col,row, self.board[row][col], self.board)
+      if blocks > 1:
+        self.board = self.move(self.gravity(board))
+      return blocks
+    else:
+      return 0
   
   def floodfill(self, col, row, color, board):
     if color == 0 or not(0 <= col < self.cols and 0 <= row < self.rows):
