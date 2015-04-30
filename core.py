@@ -96,7 +96,7 @@ def move(board):
 
 
 
-class Board(object):
+class Game(object):
   #important note:
   #while programming this the board ought to be immutable to keep a functional style
   #therefor the board is a tuple instead of a list
