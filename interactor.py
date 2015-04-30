@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from subprocess import Popen, PIPE
-from board import Board
+from core import Game
 from validator import getScore
 
 def interact(prog, board):
