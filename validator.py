@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from board import Board
+from core import Game
 
 def getScore(board, moves):
   score = 0
