@@ -126,3 +126,6 @@ class Game(object):
   #print the board
   def display(self):
     print "\n".join(map(lambda l:" ".join(map(str,l)), self.board))
+
+  def show(self):
+    print str(self.board).replace('(','[').replace(')',']')
