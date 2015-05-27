@@ -114,6 +114,7 @@ class Game(object):
   #@param col, row The coords to click at
   #@return The number of blocks destroyed
   def click(self,col,row):
+    row = len(self.board) - row - 1
     if 0 <= col < self.cols and 0 <= row < self.rows:
       pts, board = floodfill(self.board, self.board[row][col], col,row)
       if pts > 1:
