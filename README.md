@@ -1,4 +1,4 @@
 SameGame
 ========
 
-implemetation of SameGame for FH-Wedel Programmierwettbewerb
+implemetation of SameGame for FH-Wedel Programmierwettbewerb SS2015
